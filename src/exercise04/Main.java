@@ -17,15 +17,13 @@ public class Main {
             System.out.println("4: Xóa danh mục");
             System.out.println("5: Thoát");
             System.out.print("Nhập lựa chọn: ");
-            choice = scanner.nextInt();
-            scanner.nextLine(); // Đọc dòng trống
+            choice = Integer.parseInt(scanner.nextLine().trim());
 
             switch (choice) {
                 case 1:
                     // Thêm danh mục
                     System.out.print("Nhập ID danh mục: ");
-                    int id = scanner.nextInt();
-                    scanner.nextLine(); // Đọc dòng trống
+                    int id = Integer.parseInt(scanner.nextLine());
                     System.out.print("Nhập tên danh mục: ");
                     String name = scanner.nextLine();
                     System.out.print("Nhập mô tả danh mục: ");
@@ -36,9 +34,8 @@ public class Main {
 
                 case 2:
                     // Hiển thị danh mục
-
-                    List<Category> categories = categoryManagement.findAll();
-                    if (categories.isEmpty()) {
+                    Category[] categories = categoryManagement.findAll();
+                    if (categories.length == 0) {
                         System.out.println("Danh sách danh mục trống !");
                         break;
                     }
@@ -51,8 +48,7 @@ public class Main {
                 case 3:
                     // Cập nhật danh mục
                     System.out.print("Nhập ID danh mục cần cập nhật: ");
-                    int updateId = scanner.nextInt();
-                    scanner.nextLine(); // Đọc dòng trống
+                    int updateId =Integer.parseInt(scanner.nextLine().trim());
                     System.out.print("Nhập tên mới: ");
                     String newName = scanner.nextLine();
                     System.out.print("Nhập mô tả mới: ");
@@ -64,9 +60,8 @@ public class Main {
                 case 4:
                     // Xóa danh mục
                     System.out.print("Nhập ID danh mục cần xóa: ");
-                    int deleteId = scanner.nextInt();
+                    int deleteId = Integer.parseInt(scanner.nextLine().trim());
                     categoryManagement.deleteById(deleteId);
-
                     break;
 
                 case 5:

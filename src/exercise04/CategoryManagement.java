@@ -1,38 +1,44 @@
 package exercise04;
 
-import java.util.ArrayList;
-import java.util.List;
-
 class CategoryManagement implements ICRUD {
-    private List<Category> categories = new ArrayList<>();
+    private Category[] categories = new Category[100]; // Mảng để lưu danh mục
+    private int count = 0; // Số lượng danh mục hiện tại
 
-    @Override
-    public List<Category> findAll() {
-        return categories;
-    }
-
-    @Override
     public void addCategory(Category category) {
-        categories.add(category);
-    }
-
-    @Override
-    public void updateCategory(Category category) {
-        for (int i = 0; i < categories.size(); i++) {
-            if (categories.get(i).getId() == category.getId()) {
-                categories.set(i, category);
-                return;
-            }
+        if (count < categories.length) {
+            categories[count++] = category;
+        } else {
+            System.out.println("Mảng đã đầy, không thể thêm danh mục.");
         }
     }
 
-    @Override
+    public Category[] findAll() {
+        Category[] result = new Category[count];
+        System.arraycopy(categories, 0, result, 0, count);
+        return result;
+    }
+
+    public void updateCategory(Category category) {
+        for (int i = 0; i < count; i++) {
+            if (categories[i].getId() == category.getId()) {
+                categories[i] = category;
+                return;
+            }
+        }
+        System.out.println("Danh mục không tìm thấy.");
+    }
+
     public void deleteById(int id) {
-       boolean rs = categories.removeIf(category -> category.getId() == id);
-       if(rs){
-           System.out.println("Xóa thành công danh mục ");
-       }else {
-           System.out.println("Danh mục không tồn tại !");
-       }
+        for (int i = 0; i < count; i++) {
+            if (categories[i].getId() == id) {
+                for (int j = i; j < count - 1; j++) {
+                    categories[j] = categories[j + 1]; // Dịch chuyển mảng
+                }
+                categories[--count] = null; // Giảm số lượng và xóa phần tử cuối
+                System.out.println("Danh mục đã được xóa.");
+                return;
+            }
+        }
+        System.out.println("Không tìm thấy danh mục với ID: " + id);
     }
 }
