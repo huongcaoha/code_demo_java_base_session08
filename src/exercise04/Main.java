@@ -1,78 +1,21 @@
 package exercise04;
 
-import java.util.List;
-import java.util.Scanner;
-
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        CategoryManagement categoryManagement = new CategoryManagement();
-        int choice;
+        // Khởi tạo tài khoản A và B
+        BankAccount accountA = new BankAccount("A001", "Nguyễn Văn A", "0123456789");
+        BankAccount accountB = new BankAccount("B001", "Nguyễn Văn B", "0987654321");
 
-        do {
-            System.out.println("Menu:");
-            System.out.println("1: Thêm danh mục");
-            System.out.println("2: Hiển thị danh mục");
-            System.out.println("3: Cập nhật danh mục");
-            System.out.println("4: Xóa danh mục");
-            System.out.println("5: Thoát");
-            System.out.print("Nhập lựa chọn: ");
-            choice = Integer.parseInt(scanner.nextLine().trim());
+        // Nạp tiền vào tài khoản A
+        accountA.deposit(1000);
 
-            switch (choice) {
-                case 1:
-                    // Thêm danh mục
-                    System.out.print("Nhập ID danh mục: ");
-                    int id = Integer.parseInt(scanner.nextLine());
-                    System.out.print("Nhập tên danh mục: ");
-                    String name = scanner.nextLine();
-                    System.out.print("Nhập mô tả danh mục: ");
-                    String description = scanner.nextLine();
-                    categoryManagement.addCategory(new Category(id, name, description));
-                    System.out.println("Danh mục đã được thêm.");
-                    break;
+        // Chuyển tiền từ tài khoản A đến tài khoản B
+        double transferAmount = 300;
+        accountA.withdraw(transferAmount); // Rút tiền từ tài khoản A
+        accountB.deposit(transferAmount);   // Nạp tiền vào tài khoản B
 
-                case 2:
-                    // Hiển thị danh mục
-                    Category[] categories = categoryManagement.findAll();
-                    if (categories.length == 0) {
-                        System.out.println("Danh sách danh mục trống !");
-                        break;
-                    }
-                    System.out.println("Danh sách danh mục:");
-                    for (Category category : categories) {
-                        System.out.println(category);
-                    }
-                    break;
-
-                case 3:
-                    // Cập nhật danh mục
-                    System.out.print("Nhập ID danh mục cần cập nhật: ");
-                    int updateId =Integer.parseInt(scanner.nextLine().trim());
-                    System.out.print("Nhập tên mới: ");
-                    String newName = scanner.nextLine();
-                    System.out.print("Nhập mô tả mới: ");
-                    String newDescription = scanner.nextLine();
-                    categoryManagement.updateCategory(new Category(updateId, newName, newDescription));
-                    System.out.println("Danh mục đã được cập nhật.");
-                    break;
-
-                case 4:
-                    // Xóa danh mục
-                    System.out.print("Nhập ID danh mục cần xóa: ");
-                    int deleteId = Integer.parseInt(scanner.nextLine().trim());
-                    categoryManagement.deleteById(deleteId);
-                    break;
-
-                case 5:
-                    System.out.println("Thoát khỏi chương trình.");
-                    break;
-
-                default:
-                    System.out.println("Lựa chọn không hợp lệ. Vui lòng thử lại.");
-            }
-        } while (choice != 5);
-
-        scanner.close();
+        // Hiển thị số dư các tài khoản
+        accountA.displayBalance();
+        accountB.displayBalance();
     }
 }

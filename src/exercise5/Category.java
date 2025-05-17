@@ -1,4 +1,4 @@
-package exercise04;
+package exercise5;
 
 class Category {
     private int id;

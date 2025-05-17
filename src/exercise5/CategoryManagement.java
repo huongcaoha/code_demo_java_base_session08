@@ -1,4 +1,4 @@
-package exercise04;
+package exercise5;
 
 class CategoryManagement implements ICRUD {
     private Category[] categories = new Category[100]; // Mảng để lưu danh mục

@@ -1,4 +1,4 @@
-package exercise04;
+package exercise5;
 
 interface ICRUD {
     Category[] findAll();

@@ -1,4 +1,4 @@
-package exercise05;
+package exercise04;
 
 class BankAccount implements IBank {
     private String accountId;

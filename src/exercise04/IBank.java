@@ -1,4 +1,4 @@
-package exercise05;
+package exercise04;
 
 interface IBank {
     void deposit(double amount);
